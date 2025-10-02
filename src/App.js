@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, createRef} from 'react';
 import VisionCamera from './components/VisionCamera';
 import Filters from './components/Filters';
 import CapturedPhoto from './components/CapturedPhoto';
 import {Camera} from 'react-native-vision-camera';
-import {StyleSheet, SafeAreaView} from 'react-native';
+import {StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 
 class App extends PureComponent {
   constructor() {
@@ -14,6 +14,8 @@ class App extends PureComponent {
       selectedFilter: 'Arabica',
       url: null,
     };
+
+    this.cameraRef = createRef();
   }
 
   componentDidMount() {
@@ -52,9 +54,17 @@ class App extends PureComponent {
 
     return (
       <SafeAreaView style={styles.container}>
-        <VisionCamera device={device} />
-        <Filters />
-        <CapturedPhoto url={url} />
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.container}>
+          <VisionCamera
+            device={device}
+            takePhoto={this.takePhoto}
+            cameraRef={this.cameraRef}
+          />
+          <Filters />
+          <CapturedPhoto url={url} />
+        </ScrollView>
       </SafeAreaView>
     );
   }
