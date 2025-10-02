@@ -11,9 +11,10 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@shopify/react-native-skia": "1.12.4",
+    "@shopify/react-native-skia": "0.1.156",
     "react": "17.0.2",
-    "react-native": "0.68.2"
+    "react-native": "0.68.2",
+    "react-native-color-matrix-image-filters": "^7.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
