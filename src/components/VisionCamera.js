@@ -5,7 +5,8 @@ import {width, height} from '../utils/constants';
 
 class VisionCamera extends PureComponent {
   render() {
-    const {device, takePhoto, cameraRef} = this.props;
+    const {device, takePhoto, cameraRef, hasPermission} = this.props;
+    const isButtonsDisabled = !hasPermission;
 
     return (
       <View style={styles.container}>
@@ -14,11 +15,16 @@ class VisionCamera extends PureComponent {
             ref={cameraRef}
             device={device}
             style={styles.camera}
-            isActive={true}
+            isActive={hasPermission}
+            photo={true}
           />
         </View>
         <View style={styles.buttonContainer}>
-          <Button title="Take Photo" onPress={takePhoto} />
+          <Button
+            title="Take Photo"
+            onPress={takePhoto}
+            disabled={isButtonsDisabled}
+          />
         </View>
       </View>
     );
