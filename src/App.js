@@ -4,6 +4,7 @@ import Filters from './components/Filters';
 import CapturedPhoto from './components/CapturedPhoto';
 import {Camera} from 'react-native-vision-camera';
 import {StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import {imageFilters} from './utils/constants';
 
 class App extends PureComponent {
   constructor() {
@@ -11,7 +12,7 @@ class App extends PureComponent {
 
     this.state = {
       device: null,
-      selectedFilter: 'Arabica',
+      selectedFilter: imageFilters[0],
       url: null,
     };
 
@@ -46,7 +47,7 @@ class App extends PureComponent {
   };
 
   render() {
-    const {device, url} = this.state;
+    const {device, url, selectedFilter} = this.state;
 
     if (!device) {
       return null;
@@ -62,7 +63,12 @@ class App extends PureComponent {
             takePhoto={this.takePhoto}
             cameraRef={this.cameraRef}
           />
-          <Filters />
+
+          <Filters
+            setSelectedFilter={this.setSelectedFilter}
+            selectedFilter={selectedFilter}
+          />
+
           <CapturedPhoto url={url} />
         </ScrollView>
       </SafeAreaView>

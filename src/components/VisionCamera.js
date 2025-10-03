@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   buttonContainer: {
-    marginTop: 10,
+    marginVertical: 30,
   },
 });
