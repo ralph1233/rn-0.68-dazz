@@ -1,18 +1,25 @@
-import React from 'react';
+/* eslint-disable prettier/prettier */
+import React, {memo} from 'react';
 import {
   ImageShader,
   Shader,
   Skia,
   Group,
   Fill,
+  Canvas,
 } from '@shopify/react-native-skia';
 import {base64 as lutBase64} from '../LUTs/vintageVibe';
-import {Dimensions} from 'react-native';
-import RNFS from 'react-native-fs';
+import {Dimensions, StyleSheet} from 'react-native';
 
-const {height} = Dimensions.get('window');
+const {height, width} = Dimensions.get('window');
+const imageWidth = width * 0.9;
+const imageHeight = height * 0.3;
 
-export const VintageVibe = async (photoUrl, imageWidth, imageHeight) => {
+const VintageVibe = ({base64}) => {
+  if (!base64) {
+    return null;
+  }
+
   const shader = Skia.RuntimeEffect.Make(`
     uniform shader image;
     uniform shader luts;
@@ -38,49 +45,61 @@ export const VintageVibe = async (photoUrl, imageWidth, imageHeight) => {
 
   const lutData = Skia.Data.fromBase64(lutBase64);
   const lutImage = Skia.Image.MakeImageFromEncoded(lutData);
-  const base64 = await RNFS.readFile(photoUrl, 'base64');
-  const data = Skia.Data.fromBase64(base64);
-  const capturedImage = Skia.Image.MakeImageFromEncoded(data);
+  const capturedImageData = Skia.Data.fromBase64(base64);
+  const capturedImage = Skia.Image.MakeImageFromEncoded(capturedImageData);
 
   if (!capturedImage || !shader || !lutImage) {
     return null;
   }
 
   return (
-    <Group
-      clip={{
-        rect: {
-          x: 0,
-          y: 0,
-          width: imageWidth,
-          height: imageHeight,
-        },
-        rx: height * 0.011,
-        ry: height * 0.011,
-      }}>
-      <Fill />
-      <Shader source={shader} uniforms={{}}>
-        <ImageShader
-          fit="cover"
-          image={capturedImage}
-          rect={{
+    <Canvas style={styles.canvas}>
+      <Group
+        clip={{
+          rect: {
             x: 0,
             y: 0,
             width: imageWidth,
             height: imageHeight,
-          }}
-        />
-        <ImageShader
-          fit="cover"
-          image={lutImage}
-          rect={{
-            x: 0,
-            y: 0,
-            width: lutImage.width(),
-            height: lutImage.height(),
-          }}
-        />
-      </Shader>
-    </Group>
+          },
+          rx: height * 0.011,
+          ry: height * 0.011,
+        }}>
+        <Fill />
+        <Shader source={shader} uniforms={{}}>
+          <ImageShader
+            fit="cover"
+            image={capturedImage}
+            rect={{
+              x: 0,
+              y: 0,
+              width: imageWidth,
+              height: imageHeight,
+            }}
+          />
+          <ImageShader
+            fit="cover"
+            image={lutImage}
+            rect={{
+              x: 0,
+              y: 0,
+              width: lutImage.width(),
+              height: lutImage.height(),
+            }}
+          />
+        </Shader>
+      </Group>
+    </Canvas>
   );
 };
+
+export default memo(VintageVibe);
+
+const styles = StyleSheet.create({
+  canvas: {
+    width: imageWidth,
+    height: imageHeight,
+    marginTop: 50,
+    alignSelf: 'center',
+  },
+});

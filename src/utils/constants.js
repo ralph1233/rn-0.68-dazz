@@ -1,15 +1,15 @@
 /* eslint-disable prettier/prettier */
 import {Dimensions} from 'react-native';
 import Arabica from './filters/Arabica';
-import {Ava} from './filters/Ava';
-import {Vintage1} from './filters/Vintage1';
-import {Vintage2} from './filters/Vintage2';
-import {BlackAndWhite} from './filters/B&W';
-import {ColdShade} from './filters/ColdShade';
-import {VintageVibe} from './filters/VintageVibe';
-import {Sunset} from './filters/Sunset';
-import {Azrael} from './filters/Azrael';
-import {Grf} from './filters/Grf';
+import Ava from './filters/Ava';
+import Vintage1 from './filters/Vintage1';
+import Vintage2 from './filters/Vintage2';
+import BlackAndWhite from './filters/B&W';
+import ColdShade from './filters/ColdShade';
+import VintageVibe from './filters/VintageVibe';
+import Sunset from './filters/Sunset';
+import Azrael from './filters/Azrael';
+import Grf from './filters/Grf';
 
 export const {width, height} = Dimensions.get('window');
 
