@@ -44,7 +44,7 @@ const Testing = ({base64}) => {
     }
   `);
 
-  const lutImage = useImage(require('./image.png'));
+  const lutImage = useImage(require('./testing.png'));
   const capturedImageData = Skia.Data.fromBase64(base64);
   const capturedImage = Skia.Image.MakeImageFromEncoded(capturedImageData);
 
