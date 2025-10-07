@@ -13,6 +13,10 @@ import Arabica from './filters/Arabica';
 // import SClassic from './dazz filters/SClassic';
 // import IR from './dazz filters/IR';
 import Testing from './dazzfilters/Testing';
+import HCLS from './omarfiltersv1/HCLS';
+import RedLens from './omarfiltersv1/RedLens';
+import VintageSepiaSaturate from './omarfiltersv1/VintageSepiaSaturate';
+import VintageSepia from './omarfiltersv1/VintageSepia';
 
 export const {width, height} = Dimensions.get('window');
 
@@ -25,16 +29,36 @@ export const imageFiltersWithCategory = [
         Element: Arabica,
         icon: require('../assets/images/icons/coffee.png'),
       },
-      // {
-      //   name: 'IR',
-      //   Element: IR,
-      //   icon: require('../assets/images/icons/vintage1.png'),
-      // },
       {
         name: 'Testing',
         Element: Testing,
         icon: require('../assets/images/icons/vintage1.png'),
       },
+      {
+        name: 'HCLS',
+        Element: HCLS,
+        icon: require('../assets/images/icons/cloudy.png'),
+      },
+      {
+        name: 'RedLens',
+        Element: RedLens,
+        icon: require('../assets/images/icons/moon.png'),
+      },
+      {
+        name: 'VintageSepiaSaturate',
+        Element: VintageSepiaSaturate,
+        icon: require('../assets/images/icons/b&w.png'),
+      },
+      {
+        name: 'VintageSepia',
+        Element: VintageSepia,
+        icon: require('../assets/images/icons/cassette.png'),
+      },
+      // {
+      //   name: 'IR',
+      //   Element: IR,
+      //   icon: require('../assets/images/icons/vintage1.png'),
+      // },
       // {
       //   name: 'SClassic',
       //   Element: SClassic,
