@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {memo} from 'react';
+import React, {memo, useMemo, useCallback} from 'react';
 import {
   ImageShader,
   Shader,
@@ -10,6 +10,7 @@ import {
   useImage,
   Text,
   useFont,
+  vec,
 } from '@shopify/react-native-skia';
 import {Dimensions, StyleSheet} from 'react-native';
 
@@ -22,7 +23,9 @@ const Testing = ({base64}) => {
     return null;
   }
 
-  const shader = Skia.RuntimeEffect.Make(`
+  const shader = useMemo(
+    () =>
+      Skia.RuntimeEffect.Make(`
     uniform shader image;
     uniform shader luts;
   
@@ -43,15 +46,41 @@ const Testing = ({base64}) => {
 
       return lutsColor;
     }
-  `);
+  `),
+    [],
+  );
+
+  const fontError = useCallback(error => {
+    console.log(error);
+  }, []);
+
+  const font = useFont(
+    require('../../assets/fonts/digital-7.ttf'),
+    imageHeight * 0.08,
+    fontError,
+  );
 
   const lutImage = useImage(require('./testing.png'));
   const capturedImageData = Skia.Data.fromBase64(base64);
   const capturedImage = Skia.Image.MakeImageFromEncoded(capturedImageData);
 
-  if (!capturedImage || !shader || !lutImage) {
+  if (!capturedImage || !shader || !lutImage || !font) {
     return null;
   }
+
+  // Format current date: "month   day'year"
+  const formatCurrentDate = () => {
+    const now = new Date();
+    const month = now.getMonth() + 1; // getMonth() returns 0-11, so add 1
+    const day = now.getDate();
+    const year = now.getFullYear() % 100; // Get last 2 digits of year
+    return `${month}   ${day} '${year}`;
+  };
+
+  const dateText = formatCurrentDate();
+  const {ascent, descent, leading} = font.getMetrics();
+  const textHeight = Math.abs(ascent) + Math.abs(descent) + leading;
+  const textWidth = font.getTextWidth(dateText);
 
   return (
     <Canvas style={styles.canvas}>
@@ -67,6 +96,7 @@ const Testing = ({base64}) => {
           ry: height * 0.011,
         }}>
         <Fill />
+
         <Shader source={shader} uniforms={{}}>
           <ImageShader
             fit="cover"
@@ -89,6 +119,19 @@ const Testing = ({base64}) => {
             }}
           />
         </Shader>
+        <Text
+          text={dateText}
+          font={font}
+          x={imageHeight * 0.7}
+          y={0}
+          color="#ff9081"
+          transform={[
+            {
+              rotate: Math.PI / 2,
+            },
+          ]}
+          origin={vec(textWidth / 2, textHeight / 2)}
+        />
       </Group>
     </Canvas>
   );
