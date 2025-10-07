@@ -1,22 +1,6 @@
 /* eslint-disable prettier/prettier */
 import {Dimensions} from 'react-native';
-import Arabica from './filters/Arabica';
-// import Ava from './filters/Ava';
-// import Vintage1 from './filters/Vintage1';
-// import Vintage2 from './filters/Vintage2';
-// import BlackAndWhite from './filters/B&W';
-// import ColdShade from './filters/ColdShade';
-// import VintageVibe from './filters/VintageVibe';
-// import Sunset from './filters/Sunset';
-// import Azrael from './filters/Azrael';
-// import Grf from './filters/Grf';
-// import SClassic from './dazz filters/SClassic';
-// import IR from './dazz filters/IR';
 import Testing from './dazzfilters/Testing';
-import HCLS from './omarfiltersv1/HCLS';
-import RedLens from './omarfiltersv1/RedLens';
-import VintageSepiaSaturate from './omarfiltersv1/VintageSepiaSaturate';
-import VintageSepia from './omarfiltersv1/VintageSepia';
 
 export const {width, height} = Dimensions.get('window');
 
@@ -25,90 +9,10 @@ export const imageFiltersWithCategory = [
     category: 'Digital',
     filters: [
       {
-        name: 'Arabica',
-        Element: Arabica,
-        icon: require('../assets/images/icons/coffee.png'),
-      },
-      {
         name: 'Testing',
         Element: Testing,
         icon: require('../assets/images/icons/vintage1.png'),
       },
-      {
-        name: 'HCLS',
-        Element: HCLS,
-        icon: require('../assets/images/icons/cloudy.png'),
-      },
-      {
-        name: 'RedLens',
-        Element: RedLens,
-        icon: require('../assets/images/icons/moon.png'),
-      },
-      {
-        name: 'VintageSepiaSaturate',
-        Element: VintageSepiaSaturate,
-        icon: require('../assets/images/icons/b&w.png'),
-      },
-      {
-        name: 'VintageSepia',
-        Element: VintageSepia,
-        icon: require('../assets/images/icons/cassette.png'),
-      },
-      // {
-      //   name: 'IR',
-      //   Element: IR,
-      //   icon: require('../assets/images/icons/vintage1.png'),
-      // },
-      // {
-      //   name: 'SClassic',
-      //   Element: SClassic,
-      //   icon: require('../assets/images/icons/vintage1.png'),
-      // },
-      // {
-      //   name: 'Ava',
-      //   Element: Ava,
-      //   icon: require('../assets/images/icons/cloudy.png'),
-      // },
-      // {
-      //   name: 'Azrael',
-      //   Element: Azrael,
-      //   icon: require('../assets/images/icons/moon.png'),
-      // },
-      // {
-      //   name: 'Vintage1',
-      //   Element: Vintage1,
-      //   icon: require('../assets/images/icons/vintage1.png'),
-      // },
-      // {
-      //   name: 'Vintage2',
-      //   Element: Vintage2,
-      //   icon: require('../assets/images/icons/vintage2.png'),
-      // },
-      // {
-      //   name: 'B&W',
-      //   Element: BlackAndWhite,
-      //   icon: require('../assets/images/icons/b&w.png'),
-      // },
-      // {
-      //   name: 'ColdShade',
-      //   Element: ColdShade,
-      //   icon: require('../assets/images/icons/cold-shade.png'),
-      // },
-      // {
-      //   name: 'VintageVibe',
-      //   Element: VintageVibe,
-      //   icon: require('../assets/images/icons/cassette.png'),
-      // },
-      // {
-      //   name: 'Sunset',
-      //   Element: Sunset,
-      //   icon: require('../assets/images/icons/sunset.png'),
-      // },
-      // {
-      //   name: 'Grf',
-      //   Element: Grf,
-      //   icon: require('../assets/images/icons/grf.png'),
-      // },
     ],
   },
 ];

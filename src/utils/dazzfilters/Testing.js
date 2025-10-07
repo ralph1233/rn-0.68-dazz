@@ -8,8 +8,9 @@ import {
   Fill,
   Canvas,
   useImage,
+  Text,
+  useFont,
 } from '@shopify/react-native-skia';
-import {base64 as lutBase64} from '../LUTs/sclassic';
 import {Dimensions, StyleSheet} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
