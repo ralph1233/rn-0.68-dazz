@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, {memo, useMemo} from 'react';
 import {
   ImageShader,
@@ -16,10 +15,6 @@ const imageWidth = width * 0.9;
 const imageHeight = height * 0.3;
 
 const OFMR = ({base64}) => {
-  if (!base64) {
-    return null;
-  }
-
   const shader = useMemo(
     () =>
       Skia.RuntimeEffect.Make(`

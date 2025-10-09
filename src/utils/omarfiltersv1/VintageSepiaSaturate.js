@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, {memo} from 'react';
 import {
   ImageShader,
@@ -16,10 +15,6 @@ const imageWidth = width * 0.9;
 const imageHeight = height * 0.3;
 
 const VintageSepiaSaturate = ({base64}) => {
-  if (!base64) {
-    return null;
-  }
-
   const shader = Skia.RuntimeEffect.Make(`
     uniform shader image;
     uniform shader luts;
