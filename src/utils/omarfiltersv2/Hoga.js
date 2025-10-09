@@ -8,6 +8,11 @@ import {
   Fill,
   Canvas,
   useImage,
+  Rect,
+  vec,
+  RadialGradient,
+  BlurMask,
+  Circle,
 } from '@shopify/react-native-skia';
 import {Dimensions, StyleSheet} from 'react-native';
 
@@ -48,10 +53,11 @@ const Hoga = ({base64}) => {
   );
 
   const lutImage = useImage(require('./hoga.png'));
+  const blurMaskImage = useImage(require('./blur_mask_hoga.jpg'));
   const capturedImageData = Skia.Data.fromBase64(base64);
   const capturedImage = Skia.Image.MakeImageFromEncoded(capturedImageData);
 
-  if (!capturedImage || !shader || !lutImage) {
+  if (!capturedImage || !shader || !lutImage || !blurMaskImage) {
     return null;
   }
 
@@ -67,7 +73,8 @@ const Hoga = ({base64}) => {
           },
           rx: height * 0.011,
           ry: height * 0.011,
-        }}>
+        }}
+        blendMode="multiply">
         <Fill />
 
         <Shader source={shader} uniforms={{}}>
@@ -92,6 +99,36 @@ const Hoga = ({base64}) => {
             }}
           />
         </Shader>
+
+        {/* <Rect x={0} y={0} width={imageWidth} height={imageHeight}>
+          <RadialGradient
+            c={vec(imageWidth / 2, imageHeight / 2)}
+            r={imageWidth * 0.8}
+            colors={['transparent', 'transparent', 'black']}
+            positions={[0, 0.6, 1]}
+            mode="clamp"
+          />
+        </Rect> */}
+
+        <Rect x={0} y={0} width={imageWidth} height={imageHeight} opacity={0.8}>
+          <ImageShader
+            fit="cover"
+            image={blurMaskImage}
+            rect={{
+              x: 0,
+              y: 0,
+              width: imageWidth,
+              height: imageHeight,
+            }}
+          />
+        </Rect>
+
+        {/* <Circle
+          c={vec(imageWidth / 2, imageHeight / 2)}
+          r={imageWidth * 0.5}
+          color="black">
+          <BlurMask blur={20} style="outer" />
+        </Circle> */}
       </Group>
     </Canvas>
   );
