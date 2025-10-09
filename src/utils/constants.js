@@ -4,6 +4,8 @@ import Testing from './dazzfilters/Testing';
 import IR from './omarfiltersv2/IR';
 import OFMR from './omarfiltersv2/OFMR';
 import Hoga from './omarfiltersv2/Hoga';
+import NE135WithLayer from './omarfiltersv3/NE135WithLayer';
+import NE135 from './omarfiltersv3/NE135';
 
 export const {width, height} = Dimensions.get('window');
 
@@ -34,6 +36,17 @@ export const imageFiltersWithCategory = [
         name: 'Hoga',
         Element: Hoga,
         icon: require('../assets/images/icons/sunset.png'),
+      },
+
+      {
+        name: 'NE135WithLayer',
+        Element: NE135WithLayer,
+        icon: require('../assets/images/icons/vintage2.png'),
+      },
+      {
+        name: 'NE135',
+        Element: NE135,
+        icon: require('../assets/images/icons/moon.png'),
       },
     ],
   },

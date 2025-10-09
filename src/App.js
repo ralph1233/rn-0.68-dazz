@@ -15,6 +15,7 @@ class App extends PureComponent {
 
     this.state = {
       selectedFilter: imageFilters[0],
+      ne135: [],
     };
   }
 
@@ -26,14 +27,33 @@ class App extends PureComponent {
 
   takePhoto = async (cameraRef, navigation) => {
     try {
+      const {selectedFilter, ne135} = this.state;
+
       const photo = await cameraRef.current.takePhoto();
 
       const {path} = photo;
 
       const base64 = await RNFS.readFile(path, 'base64');
 
+      if (selectedFilter.name === 'NE135WithLayer') {
+        if (ne135.length === 0) {
+          this.setState({
+            ne135: [base64],
+          });
+          Alert.alert('Error', 'Please take another photo');
+          return;
+        }
+      }
+
       navigation.navigate('FilteredPhoto', {
-        base64,
+        base64:
+          selectedFilter.name === 'NE135WithLayer'
+            ? [...ne135, base64]
+            : base64,
+      });
+
+      this.setState({
+        ne135: [],
       });
     } catch (error) {
       console.log(error);

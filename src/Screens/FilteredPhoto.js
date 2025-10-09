@@ -13,6 +13,7 @@ class FilteredPhoto extends PureComponent {
     const {Element} = imageFilters.find(
       imageFilter => imageFilter.name === selectedFilter.name,
     );
+    console.log(base64.length);
 
     return (
       <SafeAreaView style={styles.container}>
