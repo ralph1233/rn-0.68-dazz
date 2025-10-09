@@ -74,8 +74,80 @@ const NE135WithLayer = ({base64}) => {
           rx: 0,
           ry: 0,
         }}>
+        <Group
+          clip={{
+            rect: {
+              x: 0,
+              y: 0,
+              width: imageWidth,
+              height: imageHeight * 0.5,
+            },
+            rx: 0,
+            ry: 0,
+          }}>
+          <Fill />
+          <Shader source={shader} uniforms={{}}>
+            <ImageShader
+              fit="fill"
+              image={capturedImage1}
+              rect={{
+                x: 0,
+                y: 0,
+                width: imageWidth,
+                height: imageHeight * 0.5,
+              }}
+            />
+            <ImageShader
+              fit="cover"
+              image={lutImage}
+              rect={{
+                x: 0,
+                y: 0,
+                width: lutImage.width(),
+                height: lutImage.height(),
+              }}
+            />
+          </Shader>
+        </Group>
+
+        <Group
+          clip={{
+            rect: {
+              x: 0,
+              y: imageHeight * 0.5,
+              width: imageWidth,
+              height: imageHeight * 0.5,
+            },
+            rx: 0,
+            ry: 0,
+          }}>
+          <Fill />
+          <Shader source={shader} uniforms={{}}>
+            <ImageShader
+              fit="fill"
+              image={capturedImage2}
+              rect={{
+                x: 0,
+                y: imageHeight * 0.5,
+                width: imageWidth,
+                height: imageHeight * 0.5,
+              }}
+            />
+            <ImageShader
+              fit="cover"
+              image={lutImage}
+              rect={{
+                x: 0,
+                y: 0,
+                width: lutImage.width(),
+                height: lutImage.height(),
+              }}
+            />
+          </Shader>
+        </Group>
+
         <Image
-          fit="fill"
+          fit="cover"
           image={layerImage}
           rect={{
             x: 0,
@@ -84,78 +156,6 @@ const NE135WithLayer = ({base64}) => {
             height: imageHeight,
           }}
         />
-
-        <Group
-          clip={{
-            rect: {
-              x: imageWidth * 0.2,
-              y: 0,
-              width: imageWidth * 0.615,
-              height: imageHeight * 0.495,
-            },
-            rx: 0,
-            ry: 0,
-          }}>
-          <Fill />
-          <Shader source={shader} uniforms={{}}>
-            <ImageShader
-              fit="cover"
-              image={capturedImage1}
-              rect={{
-                x: imageWidth * 0.2,
-                y: 0,
-                width: imageWidth * 0.615,
-                height: imageHeight * 0.495,
-              }}
-            />
-            <ImageShader
-              fit="cover"
-              image={lutImage}
-              rect={{
-                x: 0,
-                y: 0,
-                width: lutImage.width(),
-                height: lutImage.height(),
-              }}
-            />
-          </Shader>
-        </Group>
-
-        <Group
-          clip={{
-            rect: {
-              x: imageWidth * 0.2,
-              y: imageHeight * 0.51,
-              width: imageWidth * 0.615,
-              height: imageHeight * 0.49,
-            },
-            rx: 0,
-            ry: 0,
-          }}>
-          <Fill />
-          <Shader source={shader} uniforms={{}}>
-            <ImageShader
-              fit="cover"
-              image={capturedImage2}
-              rect={{
-                x: imageWidth * 0.2,
-                y: imageHeight * 0.51,
-                width: imageWidth * 0.615,
-                height: imageHeight * 0.49,
-              }}
-            />
-            <ImageShader
-              fit="cover"
-              image={lutImage}
-              rect={{
-                x: 0,
-                y: 0,
-                width: lutImage.width(),
-                height: lutImage.height(),
-              }}
-            />
-          </Shader>
-        </Group>
       </Group>
     </Canvas>
   );

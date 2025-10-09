@@ -18,7 +18,13 @@ const FQS = ({base64}) => {
   const shader = Skia.RuntimeEffect.Make(`
     uniform shader image;
     uniform shader luts;
-  
+    uniform float noiseAmount; // strength of noise (0.0 - 1.0)
+
+    // Simple pseudo-random generator based on pixel coords
+    float random(vec2 st) {
+      return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+    }
+
     half4 main(float2 xy) {
       vec4 color = image.eval(xy);
 
@@ -34,6 +40,11 @@ const FQS = ({base64}) => {
 
       vec4 lutsColor = luts.eval(float2(lutX, lutY));
 
+      // Add noise
+      float n = (random(xy) - 0.5) * 2.0 * noiseAmount;
+      lutsColor.rgb += n;
+
+      lutsColor.rgb = clamp(lutsColor.rgb, 0.0, 1.0);
       return lutsColor;
     }
   `);
@@ -60,7 +71,11 @@ const FQS = ({base64}) => {
           ry: height * 0.011,
         }}>
         <Fill />
-        <Shader source={shader} uniforms={{}}>
+        <Shader
+          source={shader}
+          uniforms={{
+            noiseAmount: 0.03,
+          }}>
           <ImageShader
             fit="cover"
             image={capturedImage}
