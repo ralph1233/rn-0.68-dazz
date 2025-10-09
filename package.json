@@ -12,12 +12,16 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@react-navigation/native": "6.1.1",
+    "@react-navigation/native-stack": "6.9.6",
     "@shopify/react-native-skia": "0.1.156",
     "react": "17.0.2",
     "react-native": "0.68.2",
     "react-native-color-matrix-image-filters": "^7.0.2",
     "react-native-fs": "^2.20.0",
     "react-native-permissions": "3.10.1",
+    "react-native-safe-area-context": "4.4.1",
+    "react-native-screens": "3.29.0",
     "react-native-vision-camera": "2.16.8"
   },
   "devDependencies": {

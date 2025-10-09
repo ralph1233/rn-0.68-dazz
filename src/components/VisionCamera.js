@@ -4,8 +4,14 @@ import {Camera} from 'react-native-vision-camera';
 import {width, height} from '../utils/constants';
 
 class VisionCamera extends PureComponent {
+  _takePhoto = () => {
+    const {cameraRef, takePhoto, navigation} = this.props;
+
+    takePhoto(cameraRef, navigation);
+  };
+
   render() {
-    const {device, takePhoto, cameraRef, hasPermission} = this.props;
+    const {device, cameraRef, hasPermission} = this.props;
     const isButtonsDisabled = !hasPermission;
 
     return (
@@ -22,7 +28,7 @@ class VisionCamera extends PureComponent {
         <View style={styles.buttonContainer}>
           <Button
             title="Take Photo"
-            onPress={takePhoto}
+            onPress={this._takePhoto}
             disabled={isButtonsDisabled}
           />
         </View>

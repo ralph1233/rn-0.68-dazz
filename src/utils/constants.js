@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+import {createContext} from 'react';
 import {Dimensions} from 'react-native';
 import Testing from './dazzfilters/Testing';
 import IR from './omarfiltersv2/IR';
@@ -6,6 +6,8 @@ import OFMR from './omarfiltersv2/OFMR';
 import Hoga from './omarfiltersv2/Hoga';
 
 export const {width, height} = Dimensions.get('window');
+
+export const AppContext = createContext();
 
 export const imageFiltersWithCategory = [
   {
