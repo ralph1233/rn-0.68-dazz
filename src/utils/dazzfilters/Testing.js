@@ -14,8 +14,8 @@ import {
 import {Dimensions, StyleSheet} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
-const imageWidth = width * 0.9;
-const imageHeight = height * 0.3;
+const imageWidth = width * 0.95;
+const imageHeight = height * 0.8;
 
 const Testing = ({base64}) => {
   const shader = useMemo(
@@ -51,7 +51,7 @@ const Testing = ({base64}) => {
 
   const font = useFont(
     require('../../assets/fonts/digital-7.ttf'),
-    imageHeight * 0.08,
+    imageHeight * 0.03,
     fontError,
   );
 
@@ -117,7 +117,7 @@ const Testing = ({base64}) => {
         <Text
           text={dateText}
           font={font}
-          x={imageHeight * 0.7}
+          x={imageHeight * 0.8}
           y={0}
           color="#ff9081"
           transform={[
@@ -138,7 +138,6 @@ const styles = StyleSheet.create({
   canvas: {
     width: imageWidth,
     height: imageHeight,
-    marginTop: 50,
     alignSelf: 'center',
   },
 });

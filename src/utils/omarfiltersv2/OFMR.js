@@ -11,8 +11,8 @@ import {
 import {Dimensions, StyleSheet} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
-const imageWidth = width * 0.9;
-const imageHeight = height * 0.3;
+const imageWidth = width * 0.95;
+const imageHeight = height * 0.8;
 
 const OFMR = ({base64}) => {
   const shader = useMemo(
