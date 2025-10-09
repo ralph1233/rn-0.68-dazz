@@ -6,6 +6,7 @@ import OFMR from './omarfiltersv2/OFMR';
 import Hoga from './omarfiltersv2/Hoga';
 import NE135WithLayer from './omarfiltersv3/NE135WithLayer';
 import NE135 from './omarfiltersv3/NE135';
+import FQS from './omarfiltersv3/FQS';
 
 export const {width, height} = Dimensions.get('window');
 
@@ -47,6 +48,11 @@ export const imageFiltersWithCategory = [
         name: 'NE135',
         Element: NE135,
         icon: require('../assets/images/icons/moon.png'),
+      },
+      {
+        name: 'FQS',
+        Element: FQS,
+        icon: require('../assets/images/icons/coffee.png'),
       },
     ],
   },
