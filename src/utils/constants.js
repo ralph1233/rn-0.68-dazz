@@ -11,6 +11,7 @@ import KIV88 from './omarfiltersv3/KIV88';
 import GRF from './omarfiltersv3/GRF';
 import DQS from './omarfiltersv3/DQS';
 import CPM from './omarfiltersv3/CPM';
+import DFUN from './omarfiltersv4/DFUN';
 
 export const {width, height} = Dimensions.get('window');
 
@@ -88,6 +89,12 @@ export const imageFiltersWithCategory = [
         Element: CPM,
         requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/cpm.png'),
+      },
+      {
+        name: 'DFUN',
+        Element: DFUN,
+        requiredPhotoCount: 1,
+        // icon: require('../assets/images/icons/dfun.png'),
       },
     ],
   },
