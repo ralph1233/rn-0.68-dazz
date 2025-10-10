@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, {memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {
   ImageShader,
   Shader,
@@ -17,7 +17,7 @@ const imageWidth = width;
 const imageHeight = height * 0.8;
 
 const GRF = ({base64}) => {
-  //   const shader = Skia.RuntimeEffect.Make(`
+  //   const shader = useMemo(() => Skia.RuntimeEffect.Make(`
   //     uniform shader image;
   //     uniform shader luts;
 
@@ -38,7 +38,7 @@ const GRF = ({base64}) => {
 
   //       return lutsColor;
   //     }
-  //   `);
+  //   `), []);
 
   //   const lutImage = useImage(require('./8-135mm-ne.png'));
 

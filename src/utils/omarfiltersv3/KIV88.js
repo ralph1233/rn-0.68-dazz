@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {
   ImageShader,
   Shader,
@@ -16,7 +16,9 @@ const imageWidth = width * 0.95;
 const imageHeight = height * 0.8;
 
 const KIV88 = ({base64}) => {
-  const shader = Skia.RuntimeEffect.Make(`
+  const shader = useMemo(
+    () =>
+      Skia.RuntimeEffect.Make(`
     uniform shader image;
     uniform shader luts;
   
@@ -37,7 +39,9 @@ const KIV88 = ({base64}) => {
 
       return lutsColor;
     }
-  `);
+  `),
+    [],
+  );
 
   const lutImage = useImage(require('./11-KIV88.png'));
   const layerImage = useImage(require('./11-KIV88-layer.png'));

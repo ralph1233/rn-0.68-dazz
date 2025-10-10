@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {
   ImageShader,
   Shader,
@@ -15,7 +15,9 @@ const imageWidth = width * 0.95;
 const imageHeight = height * 0.8;
 
 const FQS = ({base64}) => {
-  const shader = Skia.RuntimeEffect.Make(`
+  const shader = useMemo(
+    () =>
+      Skia.RuntimeEffect.Make(`
     uniform shader image;
     uniform shader luts;
     uniform float noiseAmount; // strength of noise (0.0 - 1.0)
@@ -47,7 +49,9 @@ const FQS = ({base64}) => {
       lutsColor.rgb = clamp(lutsColor.rgb, 0.0, 1.0);
       return lutsColor;
     }
-  `);
+  `),
+    [],
+  );
 
   const lutImage = useImage(require('./9-FQS.png'));
   const capturedImageData = Skia.Data.fromBase64(base64);
