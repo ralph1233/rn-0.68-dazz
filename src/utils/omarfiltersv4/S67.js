@@ -7,40 +7,21 @@ import {
   Fill,
   Canvas,
   useImage,
+  Image,
 } from '@shopify/react-native-skia';
 import {Dimensions, StyleSheet} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
-const imageWidth = width * 0.95;
+const imageWidth = width;
 const imageHeight = height * 0.8;
 
-const FQS = ({base64}) => {
+const S67 = ({base64}) => {
   const shader = useMemo(
     () =>
       Skia.RuntimeEffect.Make(`
     uniform shader image;
     uniform shader luts;
-
-    // Simple noise function
-    float random(vec2 st) {
-      return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
-    }
-
-    // Noise function with multiple octaves
-    float noise(vec2 st) {
-      vec2 i = floor(st);
-      vec2 f = fract(st);
-      
-      float a = random(i);
-      float b = random(i + vec2(1.0, 0.0));
-      float c = random(i + vec2(0.0, 1.0));
-      float d = random(i + vec2(1.0, 1.0));
-      
-      vec2 u = f * f * (3.0 - 2.0 * f);
-      
-      return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
-    }
-
+  
     half4 main(float2 xy) {
       vec4 color = image.eval(xy);
 
@@ -56,21 +37,18 @@ const FQS = ({base64}) => {
 
       vec4 lutsColor = luts.eval(float2(lutX, lutY));
 
-      // Add noise to the result
-      float noiseValue = noise(xy * 100.0) * 0.2; // Adjust noise intensity
-      lutsColor.rgb += noiseValue;
-
       return lutsColor;
     }
   `),
     [],
   );
 
-  const lutImage = useImage(require('./9-FQS.png'));
+  const lutImage = useImage(require('./17-s67.png'));
+  const layerImage = useImage(require('./17-s67-layer.png'));
   const capturedImageData = Skia.Data.fromBase64(base64);
   const capturedImage = Skia.Image.MakeImageFromEncoded(capturedImageData);
 
-  if (!capturedImage || !shader || !lutImage) {
+  if (!capturedImage || !shader || !lutImage || !layerImage) {
     return null;
   }
 
@@ -84,8 +62,8 @@ const FQS = ({base64}) => {
             width: imageWidth,
             height: imageHeight,
           },
-          rx: height * 0.011,
-          ry: height * 0.011,
+          rx: 0,
+          ry: 0,
         }}>
         <Fill />
         <Shader source={shader} uniforms={{}}>
@@ -110,12 +88,23 @@ const FQS = ({base64}) => {
             }}
           />
         </Shader>
+
+        <Image
+          fit="fill"
+          image={layerImage}
+          rect={{
+            x: 0,
+            y: 0,
+            width: imageWidth,
+            height: imageHeight,
+          }}
+        />
       </Group>
     </Canvas>
   );
 };
 
-export default memo(FQS);
+export default memo(S67);
 
 const styles = StyleSheet.create({
   canvas: {

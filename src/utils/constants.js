@@ -12,6 +12,7 @@ import GRF from './omarfiltersv3/GRF';
 import DQS from './omarfiltersv3/DQS';
 import CPM from './omarfiltersv3/CPM';
 import DFUN from './omarfiltersv4/DFUN';
+import S67 from './omarfiltersv4/S67';
 
 export const {width, height} = Dimensions.get('window');
 
@@ -95,6 +96,12 @@ export const imageFiltersWithCategory = [
         Element: DFUN,
         requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/dfun.png'),
+      },
+      {
+        name: 'S67',
+        Element: S67,
+        requiredPhotoCount: 1,
+        // icon: require('../assets/images/icons/s67.png'),
       },
     ],
   },
