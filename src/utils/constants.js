@@ -9,6 +9,7 @@ import NE135 from './omarfiltersv3/NE135';
 import FQS from './omarfiltersv3/FQS';
 import KIV88 from './omarfiltersv3/KIV88';
 import GRF from './omarfiltersv3/GRF';
+import DQS from './omarfiltersv3/DQS';
 
 export const {width, height} = Dimensions.get('window');
 
@@ -74,6 +75,12 @@ export const imageFiltersWithCategory = [
         Element: GRF,
         requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/tint.png'),
+      },
+      {
+        name: 'DQS',
+        Element: DQS,
+        requiredPhotoCount: 1,
+        // icon: require('../assets/images/icons/dqs.png'),
       },
     ],
   },
