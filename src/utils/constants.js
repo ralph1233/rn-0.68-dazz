@@ -7,6 +7,7 @@ import Hoga from './omarfiltersv2/Hoga';
 import NE135WithLayer from './omarfiltersv3/NE135WithLayer';
 import NE135 from './omarfiltersv3/NE135';
 import FQS from './omarfiltersv3/FQS';
+import KIV88 from './omarfiltersv3/KIV88';
 
 export const {width, height} = Dimensions.get('window');
 
@@ -53,6 +54,11 @@ export const imageFiltersWithCategory = [
         name: 'FQS',
         Element: FQS,
         icon: require('../assets/images/icons/coffee.png'),
+      },
+      {
+        name: 'KIV88',
+        Element: KIV88,
+        icon: require('../assets/images/icons/cloudy.png'),
       },
     ],
   },

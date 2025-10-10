@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
   canvas: {
     width: imageWidth,
     height: imageHeight,
-    marginTop: 50,
     alignSelf: 'center',
   },
 });

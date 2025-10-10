@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, {memo, useMemo} from 'react';
+import React, {memo} from 'react';
 import {
   ImageShader,
   Shader,
@@ -8,11 +7,7 @@ import {
   Fill,
   Canvas,
   useImage,
-  Rect,
-  vec,
-  RadialGradient,
-  BlurMask,
-  Circle,
+  Image,
 } from '@shopify/react-native-skia';
 import {Dimensions, StyleSheet} from 'react-native';
 
@@ -20,10 +15,8 @@ const {height, width} = Dimensions.get('window');
 const imageWidth = width * 0.95;
 const imageHeight = height * 0.8;
 
-const Hoga = ({base64}) => {
-  const shader = useMemo(
-    () =>
-      Skia.RuntimeEffect.Make(`
+const KIV88 = ({base64}) => {
+  const shader = Skia.RuntimeEffect.Make(`
     uniform shader image;
     uniform shader luts;
   
@@ -44,16 +37,14 @@ const Hoga = ({base64}) => {
 
       return lutsColor;
     }
-  `),
-    [],
-  );
+  `);
 
-  const lutImage = useImage(require('./hoga.png'));
-  const blurMaskImage = useImage(require('./blur_mask_hoga.jpg'));
+  const lutImage = useImage(require('./11-KIV88.png'));
+  const layerImage = useImage(require('./11-KIV88-layer.png'));
   const capturedImageData = Skia.Data.fromBase64(base64);
   const capturedImage = Skia.Image.MakeImageFromEncoded(capturedImageData);
 
-  if (!capturedImage || !shader || !lutImage || !blurMaskImage) {
+  if (!capturedImage || !shader || !lutImage || !layerImage) {
     return null;
   }
 
@@ -69,10 +60,8 @@ const Hoga = ({base64}) => {
           },
           rx: height * 0.011,
           ry: height * 0.011,
-        }}
-        blendMode="multiply">
+        }}>
         <Fill />
-
         <Shader source={shader} uniforms={{}}>
           <ImageShader
             fit="cover"
@@ -96,41 +85,22 @@ const Hoga = ({base64}) => {
           />
         </Shader>
 
-        {/* <Rect x={0} y={0} width={imageWidth} height={imageHeight}>
-          <RadialGradient
-            c={vec(imageWidth / 2, imageHeight / 2)}
-            r={imageWidth * 0.8}
-            colors={['transparent', 'transparent', 'black']}
-            positions={[0, 0.6, 1]}
-            mode="clamp"
-          />
-        </Rect> */}
-
-        <Rect x={0} y={0} width={imageWidth} height={imageHeight} opacity={0.8}>
-          <ImageShader
-            fit="cover"
-            image={blurMaskImage}
-            rect={{
-              x: 0,
-              y: 0,
-              width: imageWidth,
-              height: imageHeight,
-            }}
-          />
-        </Rect>
-
-        {/* <Circle
-          c={vec(imageWidth / 2, imageHeight / 2)}
-          r={imageWidth * 0.5}
-          color="black">
-          <BlurMask blur={20} style="outer" />
-        </Circle> */}
+        <Image
+          fit="fill"
+          image={layerImage}
+          rect={{
+            x: 0,
+            y: 0,
+            width: imageWidth,
+            height: imageHeight,
+          }}
+        />
       </Group>
     </Canvas>
   );
 };
 
-export default memo(Hoga);
+export default memo(KIV88);
 
 const styles = StyleSheet.create({
   canvas: {
