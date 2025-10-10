@@ -10,6 +10,7 @@ import FQS from './omarfiltersv3/FQS';
 import KIV88 from './omarfiltersv3/KIV88';
 import GRF from './omarfiltersv3/GRF';
 import DQS from './omarfiltersv3/DQS';
+import CPM from './omarfiltersv3/CPM';
 
 export const {width, height} = Dimensions.get('window');
 
@@ -81,6 +82,12 @@ export const imageFiltersWithCategory = [
         Element: DQS,
         requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/dqs.png'),
+      },
+      {
+        name: 'CPM',
+        Element: CPM,
+        requiredPhotoCount: 1,
+        // icon: require('../assets/images/icons/cpm.png'),
       },
     ],
   },
