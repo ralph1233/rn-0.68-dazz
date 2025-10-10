@@ -3,7 +3,7 @@ import {
   View,
   FlatList,
   StyleSheet,
-  Image,
+  // Image,
   Text,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -24,7 +24,7 @@ class Filters extends PureComponent {
               borderColor,
             },
           ]}>
-          <Image source={item.icon} style={styles.image} />
+          {/* <Image source={item.icon} style={styles.image} /> */}
           <Text style={styles.text}>{item.name}</Text>
         </View>
       </TouchableWithoutFeedback>

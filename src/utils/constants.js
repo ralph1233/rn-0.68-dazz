@@ -8,6 +8,7 @@ import NE135WithLayer from './omarfiltersv3/NE135WithLayer';
 import NE135 from './omarfiltersv3/NE135';
 import FQS from './omarfiltersv3/FQS';
 import KIV88 from './omarfiltersv3/KIV88';
+import GRF from './omarfiltersv3/GRF';
 
 export const {width, height} = Dimensions.get('window');
 
@@ -20,45 +21,50 @@ export const imageFiltersWithCategory = [
       {
         name: 'Testing',
         Element: Testing,
-        icon: require('../assets/images/icons/vintage1.png'),
+        // icon: require('../assets/images/icons/vintage1.png'),
       },
       {
         name: 'IR',
         Element: IR,
-        icon: require('../assets/images/icons/b&w.png'),
+        // icon: require('../assets/images/icons/b&w.png'),
       },
 
       {
         name: 'OFMR',
         Element: OFMR,
-        icon: require('../assets/images/icons/cassette.png'),
+        // icon: require('../assets/images/icons/cassette.png'),
       },
 
       {
         name: 'Hoga',
         Element: Hoga,
-        icon: require('../assets/images/icons/sunset.png'),
+        // icon: require('../assets/images/icons/sunset.png'),
       },
 
       {
         name: 'NE135WithLayer',
         Element: NE135WithLayer,
-        icon: require('../assets/images/icons/vintage2.png'),
+        // icon: require('../assets/images/icons/vintage2.png'),
       },
       {
         name: 'NE135',
         Element: NE135,
-        icon: require('../assets/images/icons/moon.png'),
+        // icon: require('../assets/images/icons/moon.png'),
       },
       {
         name: 'FQS',
         Element: FQS,
-        icon: require('../assets/images/icons/coffee.png'),
+        // icon: require('../assets/images/icons/coffee.png'),
       },
       {
         name: 'KIV88',
         Element: KIV88,
-        icon: require('../assets/images/icons/cloudy.png'),
+        // icon: require('../assets/images/icons/cloudy.png'),
+      },
+      {
+        name: 'GRF',
+        Element: GRF,
+        // icon: require('../assets/images/icons/tint.png'),
       },
     ],
   },
