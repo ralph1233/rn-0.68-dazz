@@ -88,7 +88,7 @@ const NE135WithLayer = ({base64}) => {
           <Fill />
           <Shader source={shader} uniforms={{}}>
             <ImageShader
-              fit="fill"
+              fit="cover"
               image={capturedImage1}
               rect={{
                 x: 0,
@@ -124,7 +124,7 @@ const NE135WithLayer = ({base64}) => {
           <Fill />
           <Shader source={shader} uniforms={{}}>
             <ImageShader
-              fit="fill"
+              fit="cover"
               image={capturedImage2}
               rect={{
                 x: 0,
@@ -147,7 +147,7 @@ const NE135WithLayer = ({base64}) => {
         </Group>
 
         <Image
-          fit="cover"
+          fit="fill"
           image={layerImage}
           rect={{
             x: 0,

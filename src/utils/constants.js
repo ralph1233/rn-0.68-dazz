@@ -21,49 +21,58 @@ export const imageFiltersWithCategory = [
       {
         name: 'Testing',
         Element: Testing,
+        requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/vintage1.png'),
       },
       {
         name: 'IR',
         Element: IR,
+        requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/b&w.png'),
       },
 
       {
         name: 'OFMR',
         Element: OFMR,
+        requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/cassette.png'),
       },
 
       {
         name: 'Hoga',
         Element: Hoga,
+        requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/sunset.png'),
       },
 
       {
         name: 'NE135WithLayer',
         Element: NE135WithLayer,
+        requiredPhotoCount: 2,
         // icon: require('../assets/images/icons/vintage2.png'),
       },
       {
         name: 'NE135',
         Element: NE135,
+        requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/moon.png'),
       },
       {
         name: 'FQS',
         Element: FQS,
+        requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/coffee.png'),
       },
       {
         name: 'KIV88',
         Element: KIV88,
+        requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/cloudy.png'),
       },
       {
         name: 'GRF',
         Element: GRF,
+        requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/tint.png'),
       },
     ],

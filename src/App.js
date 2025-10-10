@@ -35,10 +35,10 @@ class App extends PureComponent {
 
       const base64 = await RNFS.readFile(path, 'base64');
 
-      if (selectedFilter.name === 'NE135WithLayer') {
-        if (ne135.length === 0) {
+      if (selectedFilter.requiredPhotoCount > 1) {
+        if (ne135.length < selectedFilter.requiredPhotoCount - 1) {
           this.setState({
-            ne135: [base64],
+            ne135: [...ne135, base64],
           });
           Alert.alert('Error', 'Please take another photo');
           return;
@@ -47,9 +47,7 @@ class App extends PureComponent {
 
       navigation.navigate('FilteredPhoto', {
         base64:
-          selectedFilter.name === 'NE135WithLayer'
-            ? [...ne135, base64]
-            : base64,
+          selectedFilter.requiredPhotoCount > 1 ? [...ne135, base64] : base64,
       });
 
       this.setState({
