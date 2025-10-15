@@ -15,8 +15,23 @@ import {height, width} from '../../../utils/constants';
 
 class SelectPhotosModal extends PureComponent {
   renderItem = ({item}) => {
+    const {selectedPhotos, setSelectedPhotos} = this.props;
+    const isSelected = selectedPhotos.find(i => i === item);
+
     return (
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          if (isSelected) {
+            const filteredSelectedPhotos = selectedPhotos.filter(
+              i => i !== item,
+            );
+            setSelectedPhotos(filteredSelectedPhotos);
+            return;
+          }
+
+          const newSelectedPhotos = [...selectedPhotos, item];
+          setSelectedPhotos(newSelectedPhotos);
+        }}>
         <View style={styles.imageContainer}>
           <Image
             source={{
@@ -25,6 +40,7 @@ class SelectPhotosModal extends PureComponent {
             style={styles.image}
             resizeMode="cover"
           />
+          {isSelected && <View style={styles.isSelected} />}
         </View>
       </TouchableWithoutFeedback>
     );
@@ -40,9 +56,19 @@ class SelectPhotosModal extends PureComponent {
 
   keyExtractor = (_, index) => index.toString();
 
+  dismiss = () => {
+    const {setIsModalVisible, setSelectedPhotos} = this.props;
+    setSelectedPhotos([]);
+    setIsModalVisible(false);
+  };
+
+  confirmSelect = () => {
+    const {setIsModalVisible} = this.props;
+    setIsModalVisible(false);
+  };
+
   render() {
-    const {photos, isModalVisible, setIsModalVisible, selectedPhotos} =
-      this.props;
+    const {photos, isModalVisible, selectedPhotos} = this.props;
 
     if (!photos.length) {
       return null;
@@ -51,9 +77,10 @@ class SelectPhotosModal extends PureComponent {
     return (
       <Modal transparent={true} visible={isModalVisible}>
         <SafeAreaView style={styles.container}>
-          <Button title="Dismiss" onPress={() => setIsModalVisible(false)} />
+          <Button title="Dismiss" onPress={this.dismiss} />
           <FlatList
             data={photos}
+            extraData={selectedPhotos}
             renderItem={this.renderItem}
             keyExtractor={this.keyExtractor}
             numColumns={3}
@@ -62,7 +89,9 @@ class SelectPhotosModal extends PureComponent {
             maxToRenderPerBatch={9}
             windowSize={15}
           />
-          <TouchableOpacity style={styles.checkButton}>
+          <TouchableOpacity
+            style={styles.checkButton}
+            onPress={this.confirmSelect}>
             <Text
               style={styles.selectText}
               adjustsFontSizeToFit={true}
@@ -132,5 +161,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 15,
     fontWeight: '500',
+  },
+  isSelected: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
 });
