@@ -1,6 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 pod 'react-native-color-matrix-image-filters', :path => '../node_modules/react-native-color-matrix-image-filters/react-native-color-matrix-image-filters.podspec'
+pod 'ReactNativeBackgroundRemover', :path => '../node_modules/react-native-background-remover/ReactNativeBackgroundRemover.podspec'
 
  def node_require(script)
    # Resolve script with node to allow for hoisting

@@ -5,6 +5,7 @@ import {AppContext, imageFilters} from './utils/constants';
 import {Alert} from 'react-native';
 import Camera from './Screens/Camera';
 import FilteredPhoto from './Screens/FilteredPhoto';
+import Collage from './Screens/Collage';
 import RNFS from 'react-native-fs';
 
 const Stack = createNativeStackNavigator();
@@ -76,6 +77,13 @@ class App extends PureComponent {
             }}>
             <Stack.Screen name="Camera" component={Camera} />
             <Stack.Screen name="FilteredPhoto" component={FilteredPhoto} />
+            <Stack.Screen
+              name="Collage"
+              component={Collage}
+              options={{
+                headerShown: true,
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </AppContext.Provider>

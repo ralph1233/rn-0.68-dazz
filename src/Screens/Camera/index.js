@@ -1,10 +1,17 @@
 import React, {PureComponent, createRef} from 'react';
-import VisionCamera from '../components/VisionCamera';
-import Filters from '../components/Filters';
-import {SafeAreaView, ScrollView, StyleSheet, Platform} from 'react-native';
+import VisionCamera from './components/VisionCamera';
+import Filters from './components/Filters';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Platform,
+  Button,
+  View,
+} from 'react-native';
 import {Camera as _Camera} from 'react-native-vision-camera';
 import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
-import {AppContext} from '../utils/constants';
+import {AppContext} from '../../utils/constants';
 
 class Camera extends PureComponent {
   static contextType = AppContext;
@@ -43,6 +50,12 @@ class Camera extends PureComponent {
     })();
   }
 
+  navigateToCollage = () => {
+    const {navigation} = this.props;
+
+    navigation.navigate('Collage');
+  };
+
   render() {
     const {device, hasPermission} = this.state;
     const {selectedFilter, setSelectedFilter, takePhoto} = this.context;
@@ -69,6 +82,10 @@ class Camera extends PureComponent {
             setSelectedFilter={setSelectedFilter}
             selectedFilter={selectedFilter}
           />
+
+          <View style={styles.buttonContainer}>
+            <Button title="Collage" onPress={this.navigateToCollage} />
+          </View>
         </ScrollView>
       </SafeAreaView>
     );
@@ -80,5 +97,8 @@ export default Camera;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  buttonContainer: {
+    marginVertical: 50,
   },
 });

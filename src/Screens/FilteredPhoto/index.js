@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {AppContext, imageFilters} from '../utils/constants';
+import {AppContext, imageFilters} from '../../utils/constants';
 import {SafeAreaView, StyleSheet, Button, View} from 'react-native';
 
 class FilteredPhoto extends PureComponent {
