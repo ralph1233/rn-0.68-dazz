@@ -7,7 +7,7 @@ import {
   Text,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {imageFilters, height} from '../utils/constants';
+import {imageFilters, height} from '../../../utils/constants';
 
 class Filters extends PureComponent {
   renderItem = ({item}) => {

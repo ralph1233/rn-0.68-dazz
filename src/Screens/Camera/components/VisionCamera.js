@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {StyleSheet, Button, View} from 'react-native';
 import {Camera} from 'react-native-vision-camera';
-import {width, height} from '../utils/constants';
+import {width, height} from '../../../utils/constants';
 
 class VisionCamera extends PureComponent {
   _takePhoto = () => {
