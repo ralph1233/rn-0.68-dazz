@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
-import {SafeAreaView, StyleSheet, Image, Alert, Button} from 'react-native';
+import {SafeAreaView, StyleSheet, Alert, Button} from 'react-native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
+import SelectPhotosModal from './components/SelectPhotosModal';
 
 class Collage extends PureComponent {
   constructor() {
@@ -36,11 +37,19 @@ class Collage extends PureComponent {
   };
 
   render() {
+    const {photos, isModalVisible, selectedPhotos} = this.state;
+
     return (
       <SafeAreaView style={styles.container}>
         <Button
           title="Select Photos"
           onPress={() => this.setIsModalVisible(true)}
+        />
+        <SelectPhotosModal
+          photos={photos}
+          isModalVisible={isModalVisible}
+          setIsModalVisible={this.setIsModalVisible}
+          selectedPhotos={selectedPhotos}
         />
       </SafeAreaView>
     );

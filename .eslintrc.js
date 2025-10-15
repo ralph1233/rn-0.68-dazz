@@ -4,5 +4,6 @@ module.exports = {
   rules: {
     'react/no-unused-class-component-methods': 'warn',
     'no-warning-comments': 'warn',
+    'prettier/prettier': 'off',
   },
 };
