@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     padding: 10,
   },
-
+  //  eslint-disable-next-line react-native/no-unused-styles
   image: {
     width: height * 0.05,
     height: height * 0.05,

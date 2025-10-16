@@ -86,20 +86,4 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  checkButton: {
-    width: height * 0.1,
-    height: height * 0.1,
-    borderRadius: height * 0.1,
-    position: 'absolute',
-    left: 20,
-    bottom: 20,
-    backgroundColor: 'green',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  selectText: {
-    color: 'white',
-    fontWeight: '500',
-    fontSize: 18,
-  },
 });
