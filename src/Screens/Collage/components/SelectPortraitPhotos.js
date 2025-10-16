@@ -3,8 +3,6 @@ import {
   FlatList,
   StyleSheet,
   Image,
-  Modal,
-  SafeAreaView,
   Button,
   View,
   TouchableWithoutFeedback,
@@ -14,7 +12,7 @@ import {
 } from 'react-native';
 import {height, width} from '../../../utils/constants';
 
-class SelectPhotosModal extends PureComponent {
+class SelectPortraitPhotos extends PureComponent {
   renderItem = ({item}) => {
     const {portraitPhotos, setPortraitPhotos} = this.props;
     const isSelected = portraitPhotos.find(i => i === item);
@@ -74,59 +72,53 @@ class SelectPhotosModal extends PureComponent {
   };
 
   render() {
-    const {photos, isModalVisible, portraitPhotos} = this.props;
+    const {photos, portraitPhotos} = this.props;
 
     if (!photos.length) {
       return null;
     }
 
     return (
-      <Modal transparent={true} visible={isModalVisible}>
-        <SafeAreaView style={styles.container}>
-          <Button title="Dismiss" onPress={this.dismiss} />
-          <FlatList
-            data={photos}
-            extraData={portraitPhotos}
-            renderItem={this.renderItem}
-            keyExtractor={this.keyExtractor}
-            numColumns={3}
-            getItemLayout={this.getItemLayout}
-            initialNumToRender={3}
-            maxToRenderPerBatch={9}
-            windowSize={15}
-          />
-          <TouchableOpacity
-            style={styles.checkButton}
-            onPress={this.confirmSelect}>
+      <React.Fragment>
+        <Button title="Dismiss" onPress={this.dismiss} />
+        <FlatList
+          data={photos}
+          extraData={portraitPhotos}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+          numColumns={3}
+          getItemLayout={this.getItemLayout}
+          initialNumToRender={3}
+          maxToRenderPerBatch={9}
+          windowSize={15}
+        />
+        <TouchableOpacity
+          style={styles.checkButton}
+          onPress={this.confirmSelect}>
+          <Text
+            style={styles.selectText}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
+            Select
+          </Text>
+
+          <View style={styles.selectedPortraitPhotos}>
             <Text
-              style={styles.selectText}
+              style={styles.selectedPortraitPhotosText}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
-              Select
+              {portraitPhotos.length}
             </Text>
-
-            <View style={styles.selectedPortraitPhotos}>
-              <Text
-                style={styles.selectedPortraitPhotosText}
-                adjustsFontSizeToFit={true}
-                numberOfLines={1}>
-                {portraitPhotos.length}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </SafeAreaView>
-      </Modal>
+          </View>
+        </TouchableOpacity>
+      </React.Fragment>
     );
   }
 }
 
-export default SelectPhotosModal;
+export default SelectPortraitPhotos;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
   imageContainer: {
     width: width * 0.33,
     height: height * 0.1,

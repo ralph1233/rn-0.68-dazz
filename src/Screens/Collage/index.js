@@ -1,7 +1,9 @@
 import React, {PureComponent} from 'react';
 import {SafeAreaView, StyleSheet, Alert, Button} from 'react-native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
-import SelectPhotosModal from './components/SelectPhotosModal';
+import SelectPortraitPhotos from './components/SelectPortraitPhotos';
+import SelectBackgroundPhoto from './components/SelectBackgroundPhoto';
+import BaseModal from './components/BaseModal';
 
 class Collage extends PureComponent {
   constructor() {
@@ -12,6 +14,12 @@ class Collage extends PureComponent {
       portraitPhotos: [],
       backgroundPhoto: null,
       isModalVisible: false,
+      mode: 'portrait',
+    };
+
+    this.modes = {
+      portrait: SelectPortraitPhotos,
+      background: SelectBackgroundPhoto,
     };
   }
 
@@ -37,6 +45,19 @@ class Collage extends PureComponent {
     });
   };
 
+  setMode = mode => {
+    this.setState({
+      mode,
+    });
+    this.setIsModalVisible(true);
+  };
+
+  setBackgroundPhoto = backgroundPhoto => {
+    this.setState({
+      backgroundPhoto,
+    });
+  };
+
   setPortraitPhotos = portraitPhotos => {
     this.setState({
       portraitPhotos,
@@ -44,21 +65,40 @@ class Collage extends PureComponent {
   };
 
   render() {
-    const {photos, isModalVisible, portraitPhotos} = this.state;
+    const {isModalVisible, mode, photos, portraitPhotos, backgroundPhoto} =
+      this.state;
+    const ModeComponent = this.modes[mode];
+    const modeProps = {
+      portrait: {
+        photos,
+        setPortraitPhotos: this.setPortraitPhotos,
+        portraitPhotos,
+        setIsModalVisible: this.setIsModalVisible,
+      },
+      background: {
+        photos,
+        setBackgroundPhoto: this.setBackgroundPhoto,
+        backgroundPhoto,
+        setIsModalVisible: this.setIsModalVisible,
+      },
+    };
 
     return (
       <SafeAreaView style={styles.container}>
         <Button
           title="Select Portrait Photos"
-          onPress={() => this.setIsModalVisible(true)}
+          onPress={() => this.setMode('portrait')}
         />
 
-        <SelectPhotosModal
-          photos={photos}
+        <Button
+          title="Select Background Photo"
+          onPress={() => this.setMode('background')}
+        />
+
+        <BaseModal
           isModalVisible={isModalVisible}
-          portraitPhotos={portraitPhotos}
-          setPortraitPhotos={this.setPortraitPhotos}
           setIsModalVisible={this.setIsModalVisible}
+          renderContent={() => <ModeComponent {...modeProps[mode]} />}
         />
       </SafeAreaView>
     );
