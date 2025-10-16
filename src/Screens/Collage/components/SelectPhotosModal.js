@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Text,
+  Alert,
 } from 'react-native';
 import {height, width} from '../../../utils/constants';
 
@@ -26,6 +27,11 @@ class SelectPhotosModal extends PureComponent {
               i => i !== item,
             );
             setSelectedPhotos(filteredSelectedPhotos);
+            return;
+          }
+
+          if (selectedPhotos.length >= 15) {
+            Alert.alert('Error', 'You can only select up to 15 photos');
             return;
           }
 
