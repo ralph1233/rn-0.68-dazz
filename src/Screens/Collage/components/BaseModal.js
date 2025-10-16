@@ -3,14 +3,14 @@ import {Modal, SafeAreaView, StyleSheet} from 'react-native';
 
 class BaseModal extends PureComponent {
   render() {
-    const {isModalVisible, setIsModalVisible, renderContent} = this.props;
+    const {isModalVisible, setIsModalVisible, children} = this.props;
 
     return (
       <Modal
         transparent={true}
         visible={isModalVisible}
         onRequestClose={() => setIsModalVisible(false)}>
-        <SafeAreaView style={styles.container}>{renderContent()}</SafeAreaView>
+        <SafeAreaView style={styles.container}>{children}</SafeAreaView>
       </Modal>
     );
   }

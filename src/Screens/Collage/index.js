@@ -97,9 +97,9 @@ class Collage extends PureComponent {
 
         <BaseModal
           isModalVisible={isModalVisible}
-          setIsModalVisible={this.setIsModalVisible}
-          renderContent={() => <ModeComponent {...modeProps[mode]} />}
-        />
+          setIsModalVisible={this.setIsModalVisible}>
+          <ModeComponent {...modeProps[mode]} />
+        </BaseModal>
       </SafeAreaView>
     );
   }
