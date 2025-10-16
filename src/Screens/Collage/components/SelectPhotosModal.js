@@ -16,27 +16,27 @@ import {height, width} from '../../../utils/constants';
 
 class SelectPhotosModal extends PureComponent {
   renderItem = ({item}) => {
-    const {selectedPhotos, setSelectedPhotos} = this.props;
-    const isSelected = selectedPhotos.find(i => i === item);
+    const {portraitPhotos, setPortraitPhotos} = this.props;
+    const isSelected = portraitPhotos.find(i => i === item);
 
     return (
       <TouchableWithoutFeedback
         onPress={() => {
           if (isSelected) {
-            const filteredSelectedPhotos = selectedPhotos.filter(
+            const filteredPortraitPhotos = portraitPhotos.filter(
               i => i !== item,
             );
-            setSelectedPhotos(filteredSelectedPhotos);
+            setPortraitPhotos(filteredPortraitPhotos);
             return;
           }
 
-          if (selectedPhotos.length >= 15) {
+          if (portraitPhotos.length >= 15) {
             Alert.alert('Error', 'You can only select up to 15 photos');
             return;
           }
 
-          const newSelectedPhotos = [...selectedPhotos, item];
-          setSelectedPhotos(newSelectedPhotos);
+          const newPortraitPhotos = [...portraitPhotos, item];
+          setPortraitPhotos(newPortraitPhotos);
         }}>
         <View style={styles.imageContainer}>
           <Image
@@ -63,8 +63,8 @@ class SelectPhotosModal extends PureComponent {
   keyExtractor = (_, index) => index.toString();
 
   dismiss = () => {
-    const {setIsModalVisible, setSelectedPhotos} = this.props;
-    setSelectedPhotos([]);
+    const {setIsModalVisible, setPortraitPhotos} = this.props;
+    setPortraitPhotos([]);
     setIsModalVisible(false);
   };
 
@@ -74,7 +74,7 @@ class SelectPhotosModal extends PureComponent {
   };
 
   render() {
-    const {photos, isModalVisible, selectedPhotos} = this.props;
+    const {photos, isModalVisible, portraitPhotos} = this.props;
 
     if (!photos.length) {
       return null;
@@ -86,7 +86,7 @@ class SelectPhotosModal extends PureComponent {
           <Button title="Dismiss" onPress={this.dismiss} />
           <FlatList
             data={photos}
-            extraData={selectedPhotos}
+            extraData={portraitPhotos}
             renderItem={this.renderItem}
             keyExtractor={this.keyExtractor}
             numColumns={3}
@@ -105,12 +105,12 @@ class SelectPhotosModal extends PureComponent {
               Select
             </Text>
 
-            <View style={styles.selectedPhotos}>
+            <View style={styles.selectedPortraitPhotos}>
               <Text
-                style={styles.selectedPhotosText}
+                style={styles.selectedPortraitPhotosText}
                 adjustsFontSizeToFit={true}
                 numberOfLines={1}>
-                {selectedPhotos.length}
+                {portraitPhotos.length}
               </Text>
             </View>
           </TouchableOpacity>
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 18,
   },
-  selectedPhotos: {
+  selectedPortraitPhotos: {
     right: 0,
     top: 0,
     position: 'absolute',
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     borderRadius: height * 0.1,
   },
-  selectedPhotosText: {
+  selectedPortraitPhotosText: {
     color: 'white',
     fontSize: 15,
     fontWeight: '500',

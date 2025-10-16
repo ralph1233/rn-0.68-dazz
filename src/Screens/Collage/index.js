@@ -9,7 +9,8 @@ class Collage extends PureComponent {
 
     this.state = {
       photos: [],
-      selectedPhotos: [],
+      portraitPhotos: [],
+      backgroundPhoto: null,
       isModalVisible: false,
     };
   }
@@ -36,27 +37,28 @@ class Collage extends PureComponent {
     });
   };
 
-  setSelectedPhotos = selectedPhotos => {
+  setPortraitPhotos = portraitPhotos => {
     this.setState({
-      selectedPhotos,
+      portraitPhotos,
     });
   };
 
   render() {
-    const {photos, isModalVisible, selectedPhotos} = this.state;
+    const {photos, isModalVisible, portraitPhotos} = this.state;
 
     return (
       <SafeAreaView style={styles.container}>
         <Button
-          title="Select Photos"
+          title="Select Portrait Photos"
           onPress={() => this.setIsModalVisible(true)}
         />
+
         <SelectPhotosModal
           photos={photos}
           isModalVisible={isModalVisible}
-          selectedPhotos={selectedPhotos}
+          portraitPhotos={portraitPhotos}
+          setPortraitPhotos={this.setPortraitPhotos}
           setIsModalVisible={this.setIsModalVisible}
-          setSelectedPhotos={this.setSelectedPhotos}
         />
       </SafeAreaView>
     );
