@@ -111,7 +111,6 @@ class Collage extends PureComponent {
       background: {
         photos,
         setBackgroundPhoto: this.setBackgroundPhoto,
-        backgroundPhoto,
         setIsModalVisible: this.setIsModalVisible,
       },
     };

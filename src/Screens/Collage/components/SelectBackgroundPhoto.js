@@ -49,7 +49,7 @@ class SelectBackgroundPhoto extends PureComponent {
   };
 
   render() {
-    const {photos, backgroundPhoto} = this.props;
+    const {photos} = this.props;
 
     if (!photos.length) {
       return null;
@@ -60,7 +60,6 @@ class SelectBackgroundPhoto extends PureComponent {
         <Button title="Dismiss" onPress={this.dismiss} />
         <FlatList
           data={photos}
-          extraData={backgroundPhoto}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
           numColumns={3}
