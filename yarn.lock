@@ -1013,10 +1013,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@react-native-camera-roll/camera-roll@5.6.0":
-  version "5.6.0"
-  resolved "https://registry.yarnpkg.com/@react-native-camera-roll/camera-roll/-/camera-roll-5.6.0.tgz#385082d57d694f3fd5ae386f8b8ce24b0969c5f9"
-  integrity sha512-a/GYwnBTxj1yKWB9m/qy8GzjowSocML8NbLT81wdMh0JzZYXCLze51BR2cb8JNDgRPzA9xe7KpD3j9qQOSOjag==
+"@react-native-camera-roll/camera-roll@5.10.0":
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/@react-native-camera-roll/camera-roll/-/camera-roll-5.10.0.tgz#98cf5489be6805ac926b1c4d29ac956cf4df45dc"
+  integrity sha512-NZb/zU4S+k1Hx2Y3BdNufrfn8whNsiRjHNxeiGMak8OwDDJikqP5Ej7HXFv8sJSfTGfi1ddH0wdd541MHV/Nbw==
 
 "@react-native-community/cli-debugger-ui@^7.0.3":
   version "7.0.3"
@@ -6026,6 +6026,11 @@ react-native-color-matrix-image-filters@^7.0.2:
     concat-color-matrices "^1.0.0"
     rn-color-matrices "^4.1.0"
     ts-tiny-invariant "^2.0.5"
+
+react-native-fast-tflite@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/react-native-fast-tflite/-/react-native-fast-tflite-1.6.1.tgz#799e2063bd9ad67dbe1dbd65d5165ade7b3a3464"
+  integrity sha512-qZpVLLtIDXRTnl4bavZAoAY0YbcghvU5Rok0rbJ3HSQptyfQCY9AG/mA/4Xjc29vybIWibvRd1hDbDR7HFXsTQ==
 
 react-native-fs@^2.20.0:
   version "2.20.0"

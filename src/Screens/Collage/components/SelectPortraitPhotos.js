@@ -11,6 +11,9 @@ import {
   Alert,
 } from 'react-native';
 import {height, width} from '../../../utils/constants';
+import {removeBackground} from 'react-native-background-remover';
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
+import RNFS from 'react-native-fs';
 
 class SelectPortraitPhotos extends PureComponent {
   renderItem = ({item}) => {
@@ -66,9 +69,43 @@ class SelectPortraitPhotos extends PureComponent {
     setIsModalVisible(false);
   };
 
-  confirmSelect = () => {
-    const {setIsModalVisible} = this.props;
-    setIsModalVisible(false);
+  confirmSelect = async () => {
+    const {setIsModalVisible, portraitPhotos} = this.props;
+    const tempFiles = await RNFS.readdir(RNFS.TemporaryDirectoryPath);
+    console.log(tempFiles);
+
+    for (const file of tempFiles) {
+      if (!file.includes('ReactNative'))
+        await RNFS.unlink(`${RNFS.TemporaryDirectoryPath}${file}`);
+    }
+
+    return;
+
+    const testURL = `file://${RNFS.TemporaryDirectoryPath}${Date.now()}.jpg`;
+    console.log(testURL);
+    // return;
+    const {thumbnailBase64} = await CameraRoll.getPhotoThumbnail(
+      portraitPhotos[0],
+    );
+
+    try {
+      await RNFS.writeFile(testURL, thumbnailBase64, 'base64');
+      const f = await removeBackground(testURL);
+      console.log('Success', f);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // for (const photo of portraitPhotos) {
+    //   try {
+    //     const removedBackground = await removeBackground(photo);
+    //     console.log(removedBackground);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+
+    // setIsModalVisible(false);
   };
 
   render() {
