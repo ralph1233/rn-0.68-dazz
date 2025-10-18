@@ -1,6 +1,7 @@
 import {createContext} from 'react';
 import {Dimensions} from 'react-native';
 import Testing from './dazzfilters/Testing';
+import RedLens from './omarfiltersv1/RedLens';
 import IR from './omarfiltersv2/IR';
 import OFMR from './omarfiltersv2/OFMR';
 import Hoga from './omarfiltersv2/Hoga';
@@ -27,6 +28,11 @@ export const imageFiltersWithCategory = [
         Element: Testing,
         requiredPhotoCount: 1,
         // icon: require('../assets/images/icons/vintage1.png'),
+      },
+      {
+        name: 'Redlens',
+        Element: RedLens,
+        requiredPhotoCount: 1,
       },
       {
         name: 'IR',
