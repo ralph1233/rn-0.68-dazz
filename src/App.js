@@ -44,15 +44,23 @@ class App extends PureComponent {
         }
       }
 
+      this.setState({
+        multiplePhotos: [],
+      });
+
+      if (!path) {
+        return;
+      }
+
+      if (selectedFilter.requiredPhotoCount > 1 && !multiplePhotos[0]) {
+        return;
+      }
+
       navigation.navigate('FilteredPhoto', {
         path:
           selectedFilter.requiredPhotoCount > 1
             ? [...multiplePhotos, path]
             : path,
-      });
-
-      this.setState({
-        multiplePhotos: [],
       });
     } catch (error) {
       console.log(error);

@@ -14,7 +14,7 @@ const {height, width} = Dimensions.get('window');
 const imageWidth = width * 0.95;
 const imageHeight = height * 0.8;
 
-const RedLens = ({base64}) => {
+const RedLens = ({path, canvasRef}) => {
   const shader = useMemo(
     () =>
       Skia.RuntimeEffect.Make(`
@@ -43,15 +43,14 @@ const RedLens = ({base64}) => {
   );
 
   const lutImage = useImage(require('./redfilterlens.png'));
-  const capturedImageData = Skia.Data.fromBase64(base64);
-  const capturedImage = Skia.Image.MakeImageFromEncoded(capturedImageData);
+  const capturedImage = useImage(`file://${path}`);
 
   if (!capturedImage || !shader || !lutImage) {
     return null;
   }
 
   return (
-    <Canvas style={styles.canvas}>
+    <Canvas style={styles.canvas} ref={canvasRef}>
       <Group
         clip={{
           rect: {

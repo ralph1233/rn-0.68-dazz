@@ -15,7 +15,7 @@ const {height, width} = Dimensions.get('window');
 const imageWidth = width;
 const imageHeight = height * 0.8;
 
-const NE135WithLayer = ({base64}) => {
+const NE135WithLayer = ({path, canvasRef}) => {
   const shader = useMemo(
     () =>
       Skia.RuntimeEffect.Make(`
@@ -45,15 +45,8 @@ const NE135WithLayer = ({base64}) => {
 
   const lutImage = useImage(require('./8-135mm-ne.png'));
   const layerImage = useImage(require('./8-135mm-ne-layer.png'));
-
-  if (base64.find(item => item === undefined)) {
-    return null;
-  }
-
-  const capturedImageData1 = Skia.Data.fromBase64(base64[0]);
-  const capturedImageData2 = Skia.Data.fromBase64(base64[1]);
-  const capturedImage1 = Skia.Image.MakeImageFromEncoded(capturedImageData1);
-  const capturedImage2 = Skia.Image.MakeImageFromEncoded(capturedImageData2);
+  const capturedImage1 = useImage(`file://${path[0]}`);
+  const capturedImage2 = useImage(`file://${path[1]}`);
 
   if (
     !capturedImage1 ||
@@ -66,7 +59,7 @@ const NE135WithLayer = ({base64}) => {
   }
 
   return (
-    <Canvas style={styles.canvas}>
+    <Canvas style={styles.canvas} ref={canvasRef}>
       <Group
         clip={{
           rect: {

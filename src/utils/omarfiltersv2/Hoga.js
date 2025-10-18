@@ -20,7 +20,7 @@ const {height, width} = Dimensions.get('window');
 const imageWidth = width * 0.95;
 const imageHeight = height * 0.8;
 
-const Hoga = ({base64}) => {
+const Hoga = ({path, canvasRef}) => {
   const shader = useMemo(
     () =>
       Skia.RuntimeEffect.Make(`
@@ -50,15 +50,14 @@ const Hoga = ({base64}) => {
 
   const lutImage = useImage(require('./hoga.png'));
   const blurMaskImage = useImage(require('./blur_mask_hoga.jpg'));
-  const capturedImageData = Skia.Data.fromBase64(base64);
-  const capturedImage = Skia.Image.MakeImageFromEncoded(capturedImageData);
+  const capturedImage = useImage(`file://${path}`);
 
   if (!capturedImage || !shader || !lutImage || !blurMaskImage) {
     return null;
   }
 
   return (
-    <Canvas style={styles.canvas}>
+    <Canvas style={styles.canvas} ref={canvasRef}>
       <Group
         clip={{
           rect: {

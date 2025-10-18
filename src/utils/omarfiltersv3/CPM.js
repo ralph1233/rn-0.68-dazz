@@ -17,7 +17,7 @@ const {height, width} = Dimensions.get('window');
 const imageWidth = width * 0.95;
 const imageHeight = height * 0.8;
 
-const CPM = ({base64}) => {
+const CPM = ({path, canvasRef}) => {
   const shader = useMemo(
     () =>
       Skia.RuntimeEffect.Make(`
@@ -80,8 +80,7 @@ const CPM = ({base64}) => {
   );
 
   const lutImage = useImage(require('./15-CPM.png'));
-  const capturedImageData = Skia.Data.fromBase64(base64);
-  const capturedImage = Skia.Image.MakeImageFromEncoded(capturedImageData);
+  const capturedImage = useImage(`file://${path}`);
 
   if (!capturedImage || !shader || !lutImage || !font) {
     return null;
@@ -102,7 +101,7 @@ const CPM = ({base64}) => {
   const textWidth = font.getTextWidth(dateText);
 
   return (
-    <Canvas style={styles.canvas}>
+    <Canvas style={styles.canvas} ref={canvasRef}>
       <Group
         clip={{
           rect: {

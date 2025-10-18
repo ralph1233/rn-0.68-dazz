@@ -35,6 +35,7 @@ const FilteredPhoto = ({navigation, route}) => {
         type: 'photo',
         album: 'DazzClone',
       });
+      // !! Note: Dazz Cam saves pictures in the FileSystem and gallery, and retrieves them from the FileSystem (for now, I'm deleting them since I don't need them)
       await RNFS.unlink(tmpFile);
       await RNFS.unlink(path);
 

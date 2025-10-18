@@ -15,7 +15,7 @@ const {height, width} = Dimensions.get('window');
 const imageWidth = width;
 const imageHeight = height * 0.8;
 
-const DFUN = ({base64}) => {
+const DFUN = ({path, canvasRef}) => {
   const shader = useMemo(
     () =>
       Skia.RuntimeEffect.Make(`
@@ -45,15 +45,14 @@ const DFUN = ({base64}) => {
 
   const lutImage = useImage(require('./16-dfun.png'));
   const layerImage = useImage(require('./16-dfun-layer.png'));
-  const capturedImageData = Skia.Data.fromBase64(base64);
-  const capturedImage = Skia.Image.MakeImageFromEncoded(capturedImageData);
+  const capturedImage = useImage(`file://${path}`);
 
   if (!capturedImage || !shader || !lutImage || !layerImage) {
     return null;
   }
 
   return (
-    <Canvas style={styles.canvas}>
+    <Canvas style={styles.canvas} ref={canvasRef}>
       <Group
         clip={{
           rect: {

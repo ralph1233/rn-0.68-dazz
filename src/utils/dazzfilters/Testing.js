@@ -58,9 +58,6 @@ const Testing = ({path, canvasRef}) => {
   const lutImage = useImage(require('./testing.png'));
   const capturedImage = useImage(`file://${path}`);
 
-  console.log('Path: ', path);
-  console.log(capturedImage);
-
   if (!capturedImage || !shader || !lutImage || !font) {
     return null;
   }
