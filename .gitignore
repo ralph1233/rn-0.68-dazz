@@ -60,4 +60,5 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-/testing
+/testing/*
+!testing/Cleanup.js
