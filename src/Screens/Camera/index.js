@@ -6,7 +6,9 @@ import {
   ScrollView,
   StyleSheet,
   Platform,
+  // eslint-disable-next-line no-unused-vars
   Button,
+  // eslint-disable-next-line no-unused-vars
   View,
 } from 'react-native';
 import {Camera as _Camera} from 'react-native-vision-camera';
@@ -50,6 +52,7 @@ class Camera extends PureComponent {
     })();
   }
 
+  // eslint-disable-next-line react/no-unused-class-component-methods
   navigateToCollage = () => {
     const {navigation} = this.props;
 
@@ -83,9 +86,9 @@ class Camera extends PureComponent {
             selectedFilter={selectedFilter}
           />
 
-          <View style={styles.buttonContainer}>
+          {/* <View style={styles.buttonContainer}>
             <Button title="Collage" onPress={this.navigateToCollage} />
-          </View>
+          </View> */}
         </ScrollView>
       </SafeAreaView>
     );
