@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unreachable */
 import React, {PureComponent} from 'react';
 import {
   FlatList,
@@ -75,8 +77,9 @@ class SelectPortraitPhotos extends PureComponent {
     console.log(tempFiles);
 
     for (const file of tempFiles) {
-      if (!file.includes('ReactNative'))
+      if (!file.includes('ReactNative')) {
         await RNFS.unlink(`${RNFS.TemporaryDirectoryPath}${file}`);
+      }
     }
 
     return;
