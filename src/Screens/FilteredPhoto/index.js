@@ -37,7 +37,12 @@ const FilteredPhoto = ({navigation, route}) => {
       });
       // !! Note: Dazz Cam saves pictures in the FileSystem and gallery, and retrieves them from the FileSystem (for now, I'm deleting them since I don't need them)
       await RNFS.unlink(tmpFile);
-      await RNFS.unlink(path);
+      if (Array.isArray(path)) {
+        await RNFS.unlink(path[0]);
+        await RNFS.unlink(path[1]);
+      } else if (typeof path === 'string') {
+        await RNFS.unlink(path);
+      }
 
       Alert.alert('Success');
     } catch (error) {
