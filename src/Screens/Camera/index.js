@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  // eslint-disable-next-line react-native/no-unused-styles
   buttonContainer: {
     marginVertical: 50,
   },
