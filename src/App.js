@@ -7,6 +7,7 @@ import Camera from './Screens/Camera';
 import FilteredPhoto from './Screens/FilteredPhoto';
 // import Collage from './Screens/Collage';
 import RNFS from 'react-native-fs';
+import memoizeOne from 'memoize-one';
 
 const Stack = createNativeStackNavigator();
 
@@ -62,14 +63,20 @@ class App extends PureComponent {
     }
   };
 
+  // 👇 memoized context value
+  getContextValue = memoizeOne((selectedFilter, multiplePhotos) => ({
+    selectedFilter,
+    multiplePhotos,
+    setSelectedFilter: this.setSelectedFilter,
+    takePhoto: this.takePhoto,
+  }));
+
   render() {
+    const {selectedFilter, multiplePhotos} = this.state;
+
     return (
       <AppContext.Provider
-        value={{
-          ...this.state,
-          setSelectedFilter: this.setSelectedFilter,
-          takePhoto: this.takePhoto,
-        }}>
+        value={this.getContextValue(selectedFilter, multiplePhotos)}>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{

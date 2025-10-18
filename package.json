@@ -16,6 +16,7 @@
     "@react-navigation/native": "6.1.1",
     "@react-navigation/native-stack": "6.9.6",
     "@shopify/react-native-skia": "0.1.156",
+    "memoize-one": "^6.0.0",
     "react": "17.0.2",
     "react-native": "0.68.2",
     "react-native-fs": "^2.20.0",
