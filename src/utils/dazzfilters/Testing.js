@@ -17,7 +17,7 @@ const {height, width} = Dimensions.get('window');
 const imageWidth = width * 0.95;
 const imageHeight = height * 0.8;
 
-const Testing = ({base64, canvasRef}) => {
+const Testing = ({path, canvasRef}) => {
   const shader = useMemo(
     () =>
       Skia.RuntimeEffect.Make(`
@@ -56,8 +56,10 @@ const Testing = ({base64, canvasRef}) => {
   );
 
   const lutImage = useImage(require('./testing.png'));
-  const capturedImageData = Skia.Data.fromBase64(base64);
-  const capturedImage = Skia.Image.MakeImageFromEncoded(capturedImageData);
+  const capturedImage = useImage(`file://${path}`);
+
+  console.log('Path: ', path);
+  console.log(capturedImage);
 
   if (!capturedImage || !shader || !lutImage || !font) {
     return null;

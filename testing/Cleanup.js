@@ -7,6 +7,7 @@ const Cleanup = () => {
     (async () => {
       try {
         const files = await RNFS.readDir(RNFS.TemporaryDirectoryPath);
+        console.log(files);
         const mediaFileRegex = /\.(jpg|jpeg|mp4|png)$/i;
 
         const mediaFiles = files.filter(

@@ -1,20 +1,13 @@
 import React, {memo, useContext, useMemo, useCallback} from 'react';
 import {AppContext, imageFilters} from '../../utils/constants';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Button,
-  View,
-  Alert,
-  Platform,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Button, View, Alert} from 'react-native';
 import {useCanvasRef} from '@shopify/react-native-skia';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import RNFS from 'react-native-fs';
 
 const FilteredPhoto = ({navigation, route}) => {
   const ref = useCanvasRef();
-  const {base64} = route.params;
+  const {path} = route.params;
   const {selectedFilter} = useContext(AppContext);
 
   const {Element} = useMemo(
@@ -25,7 +18,7 @@ const FilteredPhoto = ({navigation, route}) => {
     [selectedFilter?.name],
   );
 
-  const saveImage = async () => {
+  const saveImage = useCallback(async () => {
     try {
       const image = ref.current?.makeImageSnapshot();
 
@@ -35,25 +28,26 @@ const FilteredPhoto = ({navigation, route}) => {
       }
 
       const filteredImageBase64 = image.encodeToBase64();
-      const tmpFile =
-        Platform.OS === 'ios'
-          ? `file://${RNFS.TemporaryDirectoryPath}${Date.now}.png`
-          : `${RNFS.TemporaryDirectoryPath}/${Date.now()}.png`;
+      const tmpFile = `file://${RNFS.TemporaryDirectoryPath}${Date.now}.png`;
 
       await RNFS.writeFile(tmpFile, filteredImageBase64, 'base64');
       await CameraRoll.save(tmpFile, {
         type: 'photo',
         album: 'DazzClone',
       });
+      await RNFS.unlink(tmpFile);
+      await RNFS.unlink(path);
+
+      Alert.alert('Success');
     } catch (error) {
       console.log(error);
       Alert.alert('Error Saving image');
     }
-  };
+  }, [ref, path]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Element base64={base64} canvasRef={ref} />
+      <Element path={path} canvasRef={ref} />
       <View style={styles.buttonContainer}>
         <Button title="Back" onPress={() => navigation.goBack()} />
         <View style={styles.saveButton}>

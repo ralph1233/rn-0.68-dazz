@@ -6,7 +6,6 @@ import {Alert} from 'react-native';
 import Camera from './Screens/Camera';
 import FilteredPhoto from './Screens/FilteredPhoto';
 // import Collage from './Screens/Collage';
-import RNFS from 'react-native-fs';
 import memoizeOne from 'memoize-one';
 
 const Stack = createNativeStackNavigator();
@@ -35,12 +34,10 @@ class App extends PureComponent {
 
       const {path} = photo;
 
-      const base64 = await RNFS.readFile(path, 'base64');
-
       if (selectedFilter.requiredPhotoCount > 1) {
         if (multiplePhotos.length < selectedFilter.requiredPhotoCount - 1) {
           this.setState({
-            multiplePhotos: [...multiplePhotos, base64],
+            multiplePhotos: [...multiplePhotos, path],
           });
           Alert.alert('Error', 'Please take another photo');
           return;
@@ -48,10 +45,10 @@ class App extends PureComponent {
       }
 
       navigation.navigate('FilteredPhoto', {
-        base64:
+        path:
           selectedFilter.requiredPhotoCount > 1
-            ? [...multiplePhotos, base64]
-            : base64,
+            ? [...multiplePhotos, path]
+            : path,
       });
 
       this.setState({
